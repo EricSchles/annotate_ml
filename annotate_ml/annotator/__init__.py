@@ -1,3 +1,3 @@
 from .annotator import Annotator
 
-__all__ ['Annotator']
+__all__ = ['Annotator']

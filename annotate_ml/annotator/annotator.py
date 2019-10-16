@@ -1,7 +1,17 @@
 import code
+import pandas as pd
 
 class Annotator:
-    def __init__(self, df):
+    """
+    
+    The Annotator class, will 
+    annotate a partially, or unlabled
+    dataset.
+
+    Parameters:
+    * df - a pandas dataframe
+    """
+    def __init__(self, df, model):
         self.df = df.copy()
         self.filtered_df = None
 
@@ -109,12 +119,17 @@ class Annotator:
         exit - exit the labeling process and save the data
         """)
 
+    def label_exists(self, df, column_to_annotate, index):
+        return pd.notnull(df[column_to_annotate].loc[index])
+    
     def _annotate(self, columns_to_use, column_to_annotate):
         if self.filtered_df:
             df = self.filtered_df.copy()
         else:
             df = self.df.copy()
         for index in df.index:
+            if self.label_exists(df, column_to_annotate, index):
+                continue
             label = self.get_label(df, index, columns_to_use)
             if label.strip() == "shell":
                 self.launch_shell()
@@ -128,7 +143,7 @@ class Annotator:
     def annotate(self):
         print("""
         Welcome to the annotator.
-        We are going to annotate your data.
+        Time to annotate your data.
         """)
         column_to_annotate = self.choose_column_to_annotate()
         column_to_annotate = self.confirm_column_to_annotate(column_to_annotate)

@@ -1,5 +1,5 @@
 __version__ = '0.1'
 
-from .annotator import Annotator
+from .annotator import annotator
 
-__all__ = ["Annotator"]
+__all__ = ["annotator"]

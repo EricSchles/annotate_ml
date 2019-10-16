@@ -1,0 +1,35 @@
+class CompareAnnotations:
+    """
+    """
+
+    def __init__(self, df):
+        self.df = df
+        self.samples = None
+
+    def generate_samples(self, num_samples,
+                         sample_size=None,
+                         weights=None,
+                         replace=False,
+                         sample_frac=0.1):
+        self.samples = []
+        for _ in range(num_samples):
+            if sample_size:
+                self.samples.append(
+                    self.df.sample(
+                        n=sample_size,
+                        weights=weights,
+                        replace=replace
+                    )
+                )
+            elif sample_frac:
+                self.samples.append(
+                    self.df.sample(
+                        frac=sample_frac,
+                        weights=weights,
+                        replace=replace
+                    )
+                )
+                
+    def 
+    
+    
